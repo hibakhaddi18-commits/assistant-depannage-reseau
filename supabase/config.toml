@@ -1,0 +1,4 @@
+# Already-deployed functions are pre-populated by the platform.
+
+[functions.chat-assistant]
+verify_jwt = false
