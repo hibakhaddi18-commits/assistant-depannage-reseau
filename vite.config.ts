@@ -12,7 +12,7 @@ export default defineConfig({
       includeAssets: ['apple-touch-icon.png', 'icon-192.png', 'icon-512.png'],
       manifest: {
         name: 'Assistant de Diagnostic Réseau',
-        short_name: 'Diagnostic',
+        short_name: 'Diagnostic Réseau',
         description:
           'Guide interactif de diagnostic réseau pour techniciens : 18 parcours pas à pas, commandes CMD et assistant IA.',
         lang: 'fr',
