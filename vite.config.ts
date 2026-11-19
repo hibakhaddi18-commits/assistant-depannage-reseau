@@ -16,8 +16,8 @@ export default defineConfig({
         description:
           'Guide interactif de diagnostic réseau pour techniciens : 18 parcours pas à pas, commandes CMD et assistant IA.',
         lang: 'fr',
-        theme_color: '#E9E3D8',
-        background_color: '#E9E3D8',
+        theme_color: '#203A5F',
+        background_color: '#F2F6FA',
         display: 'standalone',
         start_url: '/',
         scope: '/',
