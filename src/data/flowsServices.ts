@@ -1,4 +1,4 @@
-import { Globe, Users, FolderLock, Building2, Building, ShieldOff, Link2Off } from 'lucide-react';
+import { Globe, Users, FolderLock, Building2, Building, ShieldOff, Link2Off, Printer } from 'lucide-react';
 import type { Flow } from './types';
 
 export const problemeDns: Flow = {
@@ -560,6 +560,80 @@ export const siteUniqueBloque: Flow = {
       cause: 'Un logiciel de sécurité (antivirus, contrôle parental, filtrage) bloque ce site au niveau du poste.',
       solution:
         'Consultez les journaux de l’antivirus / du filtrage, ajoutez le site en exclusion si c’est légitime, et vérifiez que le site n’est pas classé dans une catégorie bloquée.',
+    },
+  },
+};
+
+export const imprimanteInaccessible: Flow = {
+  id: 'imprimante-inaccessible',
+  title: 'Imprimante réseau introuvable',
+  icon: Printer,
+  start: 'etat-imprimante',
+  steps: {
+    'etat-imprimante': {
+      id: 'etat-imprimante',
+      title: 'L’imprimante est-elle allumée et connectée au réseau ?',
+      note: 'Vérifiez le voyant réseau de l’imprimante (ou son écran → Paramètres réseau). Notez son adresse IP affichée à l’écran ou sur sa page de configuration.',
+      choices: [
+        { label: 'Oui, elle est allumée avec le voyant réseau actif', next: 'ping-imprimante' },
+        { label: 'Non, pas de voyant réseau / écran vide', next: 'd:imprimante-eteinte' },
+      ],
+    },
+    'ping-imprimante': {
+      id: 'ping-imprimante',
+      title: 'L’imprimante répond-elle à son adresse IP ?',
+      note: 'Remplacez 192.168.1.100 par l’adresse IP de l’imprimante. Si l’IP répond, le réseau est bon : le problème est côté file d’attente ou pilote.',
+      command: 'ping 192.168.1.100',
+      choices: [
+        { label: 'Oui, elle répond au ping', next: 'file-attente' },
+        { label: 'Non, elle ne répond pas', next: 'd:ip-imprimante' },
+      ],
+    },
+    'file-attente': {
+      id: 'file-attente',
+      title: 'La file d’attente d’impression est-elle bloquée ?',
+      note: 'Ouvrez « printmanagement.msc » ou Paramètres → Imprimantes : si des documents restent « en cours d’impression », videz la file puis redémarrez le service Spouleur d’impression.',
+      command: 'net stop spooler && net start spooler',
+      choices: [
+        { label: 'Oui, après vidage de la file et redémarrage du spouleur, ça imprime', next: 'd:file-bloquee' },
+        { label: 'Non, l’impression échoue toujours', next: 'pilote' },
+      ],
+    },
+    pilote: {
+      id: 'pilote',
+      title: 'Après réinstallation de l’imprimante et de son pilote, ça fonctionne ?',
+      note: 'Supprimez l’imprimante du poste, téléchargez le pilote correspondant au modèle exact sur le site du fabricant, puis réinstallez-la sur son port réseau (adresse IP).',
+      choices: [
+        { label: 'Oui, l’impression fonctionne', next: 'd:pilote-imprimante' },
+        { label: 'Non, toujours aucune impression', next: 'd:imprimante-panne' },
+      ],
+    },
+  },
+  diagnoses: {
+    'imprimante-eteinte': {
+      cause: 'L’imprimante est éteinte, en veille profonde, ou son câble réseau est débranché.',
+      solution:
+        'Allumez l’imprimante (réveillez-la), vérifiez son câble réseau et le port du switch. Si elle reste morte, vérifiez son alimentation électrique.',
+    },
+    'ip-imprimante': {
+      cause: 'L’imprimante n’est plus joignable à son adresse IP : adresse changée (DHCP), conflit, ou carte réseau de l’imprimante en panne.',
+      solution:
+        'Imprimez la page de configuration réseau de l’imprimante pour connaître sa nouvelle adresse, puis recréez le port d’impression avec la bonne IP. Créez une réservation DHCP pour l’imprimante afin qu’elle ne change plus.',
+    },
+    'file-bloquee': {
+      cause: 'La file d’attente d’impression était bloquée par un document corrompu.',
+      solution:
+        'Le redémarrage du spouleur a débloqué la situation. Identifiez l’application qui a envoyé le document corrompu si cela se répète, et videz la file dès qu’un blocage apparaît.',
+    },
+    'pilote-imprimante': {
+      cause: 'Le pilote d’impression du poste était corrompu ou inadapté au modèle.',
+      solution:
+        'La réinstallation a rétabli l’impression. Centralisez les pilotes validés sur un partage réseau pour les futurs déploiements.',
+    },
+    'imprimante-panne': {
+      cause: 'L’imprimante elle-même est en panne (carte réseau interne, spouleur interne, panne matérielle).',
+      solution:
+        'Redémarrez électriquement l’imprimante une fois (éteinte 1 minute), et si l’échec persiste, ouvrez un incident auprès du fournisseur ou faites jouer la maintenance.',
     },
   },
 };

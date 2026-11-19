@@ -1,7 +1,7 @@
 import { Wifi, Wrench, Gauge } from 'lucide-react';
 import { pasInternet, pasAdresseIp, wifiInstable, connectePasInternet, conflitIp, aucunReseau, panneTotale } from './flowsConnexion';
-import { problemeDns, neVoitPasOrdinateurs, dossierInaccessible, ressourcesDomaine, connexionDomaine, vpnBloque, siteUniqueBloque } from './flowsServices';
-import { reseauLent, imprimanteInaccessible, visioCoupe, heureFausses } from './flowsPerformance';
+import { problemeDns, neVoitPasOrdinateurs, dossierInaccessible, ressourcesDomaine, connexionDomaine, vpnBloque, siteUniqueBloque, imprimanteInaccessible } from './flowsServices';
+import { reseauLent, visioCoupe, heureFausses } from './flowsPerformance';
 import type { Category } from './types';
 
 export const categories: Category[] = [
@@ -17,14 +17,14 @@ export const categories: Category[] = [
     title: 'Services et accès',
     description: 'Les ressources (sites, partages, domaine, VPN) ne répondent pas.',
     icon: Wrench,
-    flows: [problemeDns, neVoitPasOrdinateurs, dossierInaccessible, ressourcesDomaine, connexionDomaine, vpnBloque, siteUniqueBloque],
+    flows: [problemeDns, neVoitPasOrdinateurs, dossierInaccessible, ressourcesDomaine, connexionDomaine, vpnBloque, siteUniqueBloque, imprimanteInaccessible],
   },
   {
     id: 'performance',
     title: 'Performance et usage',
     description: 'Le réseau fonctionne mais tout va trop lentement ou coupe.',
     icon: Gauge,
-    flows: [reseauLent, imprimanteInaccessible, visioCoupe, heureFausses],
+    flows: [reseauLent, visioCoupe, heureFausses],
   },
 ];
 
