@@ -7,9 +7,9 @@
     -webkit-font-smoothing: antialiased;
   }
   body {
-    @apply font-sans text-stone-600;
+    @apply font-sans text-slate-600;
     background:
-      linear-gradient(160deg, #f2ede3 0%, #e9e3d8 45%, #eee7da 100%);
+      linear-gradient(160deg, #fcfdfe 0%, #eff4f8 45%, #e8eff5 100%);
     background-attachment: fixed;
     min-height: 100vh;
   }
@@ -17,10 +17,10 @@
 
 @layer components {
   .glass {
-    @apply bg-white/55 backdrop-blur-xl border border-white/70 rounded-3xl shadow-[0_18px_45px_-18px_rgba(120,105,85,0.28)];
+    @apply bg-white/55 backdrop-blur-xl border border-white/70 rounded-3xl shadow-[0_18px_45px_-18px_rgba(32,58,95,0.28)];
   }
   .cmd-block {
-    @apply bg-[#e3dccf] text-[#4a4640] rounded-2xl border border-[#d8d0bf];
+    @apply bg-[#e2eaf1] text-[#1e344d] rounded-2xl border border-[#c3d2df];
   }
   .pill-btn {
     @apply rounded-full transition-all duration-200 active:scale-[0.98];
