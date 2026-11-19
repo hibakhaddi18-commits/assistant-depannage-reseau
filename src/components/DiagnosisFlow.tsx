@@ -47,7 +47,7 @@ export default function DiagnosisFlow({ flow, category, onHome, onSwitchFlow }: 
       <div className="mb-5 flex items-center justify-between gap-3">
         <button
           onClick={onHome}
-          className="pill-btn flex items-center gap-2 border border-white/70 bg-white/55 px-4 py-2 text-sm font-semibold text-cocoa-700 shadow-[0_8px_20px_-12px_rgba(120,105,85,0.4)] backdrop-blur-xl hover:bg-white/75"
+          className="pill-btn flex items-center gap-2 border border-white/70 bg-white/55 px-4 py-2 text-sm font-semibold text-cocoa-700 shadow-[0_8px_20px_-12px_rgba(32,58,95,0.4)] backdrop-blur-xl hover:bg-white/75"
         >
           <ArrowLeft className="h-4 w-4" />
           Accueil
@@ -100,8 +100,8 @@ export default function DiagnosisFlow({ flow, category, onHome, onSwitchFlow }: 
                   onClick={() => choose(i)}
                   className={
                     i === 0
-                      ? 'pill-btn w-full bg-sage-400 px-5 py-3.5 text-sm font-semibold text-white shadow-[0_12px_25px_-12px_rgba(138,155,132,0.7)] hover:bg-sage-500'
-                      : 'pill-btn w-full border border-white/80 bg-white/60 px-5 py-3.5 text-sm font-semibold text-cocoa-700 backdrop-blur-xl shadow-[0_10px_22px_-14px_rgba(120,105,85,0.45)] hover:bg-white/85'
+                      ? 'pill-btn w-full bg-sage-400 px-5 py-3.5 text-sm font-semibold text-white shadow-[0_12px_25px_-12px_rgba(46,196,159,0.7)] hover:bg-sage-500'
+                      : 'pill-btn w-full border border-white/80 bg-white/60 px-5 py-3.5 text-sm font-semibold text-cocoa-700 backdrop-blur-xl shadow-[0_10px_22px_-14px_rgba(32,58,95,0.45)] hover:bg-white/85'
                   }
                 >
                   {choice.label}
@@ -126,7 +126,7 @@ export default function DiagnosisFlow({ flow, category, onHome, onSwitchFlow }: 
         <div className="animate-fade-up space-y-4">
           <div className="glass rounded-3xl border border-sage-300/70 p-6 sm:p-8">
             <div className="mb-5 flex items-center gap-3">
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-sage-400 text-white shadow-[0_10px_22px_-10px_rgba(138,155,132,0.8)]">
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-sage-400 text-white shadow-[0_10px_22px_-10px_rgba(46,196,159,0.8)]">
                 <CheckCircle2 className="h-6 w-6" />
               </span>
               <div>
@@ -159,7 +159,7 @@ export default function DiagnosisFlow({ flow, category, onHome, onSwitchFlow }: 
           <div className="flex flex-col gap-3 sm:flex-row">
             <button
               onClick={restart}
-              className="pill-btn flex flex-1 items-center justify-center gap-2 bg-sage-400 px-5 py-3.5 text-sm font-semibold text-white shadow-[0_12px_25px_-12px_rgba(138,155,132,0.7)] hover:bg-sage-500"
+              className="pill-btn flex flex-1 items-center justify-center gap-2 bg-sage-400 px-5 py-3.5 text-sm font-semibold text-white shadow-[0_12px_25px_-12px_rgba(46,196,159,0.7)] hover:bg-sage-500"
             >
               <RotateCcw className="h-4 w-4" />
               Nouveau diagnostic

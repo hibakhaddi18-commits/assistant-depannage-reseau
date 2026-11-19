@@ -12,7 +12,7 @@ export default function UsefulCommands({ onHome }: UsefulCommandsProps) {
       <div className="mb-6 flex items-center justify-between gap-3">
         <button
           onClick={onHome}
-          className="pill-btn flex items-center gap-2 border border-white/70 bg-white/55 px-4 py-2 text-sm font-semibold text-cocoa-700 shadow-[0_8px_20px_-12px_rgba(120,105,85,0.4)] backdrop-blur-xl hover:bg-white/75"
+          className="pill-btn flex items-center gap-2 border border-white/70 bg-white/55 px-4 py-2 text-sm font-semibold text-cocoa-700 shadow-[0_8px_20px_-12px_rgba(32,58,95,0.4)] backdrop-blur-xl hover:bg-white/75"
         >
           <ArrowLeft className="h-4 w-4" />
           Accueil

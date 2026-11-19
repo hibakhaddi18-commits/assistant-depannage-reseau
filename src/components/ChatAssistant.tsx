@@ -51,13 +51,13 @@ export default function ChatAssistant() {
       <button
         onClick={() => setOpen((o) => !o)}
         aria-label={open ? 'Fermer l’assistant' : 'Ouvrir l’assistant de dépannage'}
-        className="pill-btn fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-sage-400 text-white shadow-[0_16px_35px_-12px_rgba(138,155,132,0.8)] hover:bg-sage-500 sm:bottom-6 sm:right-6"
+        className="pill-btn fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-sage-400 text-white shadow-[0_16px_35px_-12px_rgba(46,196,159,0.8)] hover:bg-sage-500 sm:bottom-6 sm:right-6"
       >
         {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
       </button>
 
       {open && (
-        <div className="animate-fade-up fixed bottom-24 right-4 z-50 flex h-[70vh] max-h-[560px] w-[calc(100%-2rem)] max-w-sm flex-col overflow-hidden rounded-3xl border border-white/70 bg-white/70 shadow-[0_25px_60px_-20px_rgba(120,105,85,0.45)] backdrop-blur-xl sm:bottom-24 sm:right-6">
+        <div className="animate-fade-up fixed bottom-24 right-4 z-50 flex h-[70vh] max-h-[560px] w-[calc(100%-2rem)] max-w-sm flex-col overflow-hidden rounded-3xl border border-white/70 bg-white/70 shadow-[0_25px_60px_-20px_rgba(32,58,95,0.45)] backdrop-blur-xl sm:bottom-24 sm:right-6">
           <div className="flex items-center gap-3 border-b border-white/70 bg-white/50 px-5 py-4">
             <span className="flex h-9 w-9 items-center justify-center rounded-full bg-sage-400 text-white">
               <MessageCircle className="h-4.5 w-4.5" strokeWidth={1.9} />
@@ -77,7 +77,7 @@ export default function ChatAssistant() {
                 <div
                   className={
                     msg.role === 'user'
-                      ? 'max-w-[85%] rounded-2xl rounded-br-md bg-sage-400 px-4 py-2.5 text-sm leading-relaxed text-white shadow-[0_8px_18px_-10px_rgba(138,155,132,0.8)]'
+                      ? 'max-w-[85%] rounded-2xl rounded-br-md bg-sage-400 px-4 py-2.5 text-sm leading-relaxed text-white shadow-[0_8px_18px_-10px_rgba(46,196,159,0.8)]'
                       : 'max-w-[85%] rounded-2xl rounded-bl-md border border-white/80 bg-white/75 px-4 py-2.5 text-sm leading-relaxed text-cocoa-700'
                   }
                 >
@@ -136,7 +136,7 @@ export default function ChatAssistant() {
                 onClick={handleSend}
                 disabled={loading || input.trim().length === 0}
                 aria-label="Envoyer le message"
-                className="pill-btn flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-sage-400 text-white shadow-[0_10px_20px_-10px_rgba(138,155,132,0.8)] transition hover:bg-sage-500 disabled:opacity-40 disabled:hover:bg-sage-400"
+                className="pill-btn flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-sage-400 text-white shadow-[0_10px_20px_-10px_rgba(46,196,159,0.8)] transition hover:bg-sage-500 disabled:opacity-40 disabled:hover:bg-sage-400"
               >
                 <Send className="h-4 w-4" />
               </button>

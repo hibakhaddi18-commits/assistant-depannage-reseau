@@ -1,4 +1,4 @@
-import { BookOpenText, Network, Search } from 'lucide-react';
+import { BookOpenText, Search } from 'lucide-react';
 import { categories } from '@/data/categories';
 import { countSteps } from '@/data/countSteps';
 import type { Category, Flow } from '@/data/types';
@@ -21,9 +21,11 @@ export default function Home({ onSelect, onShowCommands, query, onQueryChange }:
   return (
     <div className="mx-auto w-full max-w-5xl px-4 pb-16 pt-10 sm:pt-14">
       <header className="animate-fade-up text-center">
-        <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-3xl bg-white/60 shadow-[0_14px_30px_-14px_rgba(120,105,85,0.4)] backdrop-blur-xl border border-white/70">
-          <Network className="h-8 w-8 text-sage-400" strokeWidth={1.8} />
-        </div>
+        <img
+          src="/logo.png"
+          alt="Logo Assistant de Diagnostic Réseau"
+          className="mx-auto mb-5 h-16 w-16 rounded-3xl shadow-[0_14px_30px_-14px_rgba(32,58,95,0.45)]"
+        />
         <h1 className="text-3xl font-semibold tracking-tight text-cocoa-700 sm:text-4xl">
           Assistant de Diagnostic Réseau
         </h1>
@@ -43,13 +45,13 @@ export default function Home({ onSelect, onShowCommands, query, onQueryChange }:
             value={query}
             onChange={(e) => onQueryChange(e.target.value)}
             placeholder="Rechercher un symptôme…"
-            className="w-full rounded-full border border-white/70 bg-white/60 py-3 pl-11 pr-4 text-sm text-cocoa-700 placeholder:text-warmgray-400 shadow-[0_10px_25px_-15px_rgba(120,105,85,0.4)] backdrop-blur-xl outline-none transition focus:border-sage-300 focus:ring-2 focus:ring-sage-200"
+            className="w-full rounded-full border border-white/70 bg-white/60 py-3 pl-11 pr-4 text-sm text-cocoa-700 placeholder:text-warmgray-400 shadow-[0_10px_25px_-15px_rgba(32,58,95,0.4)] backdrop-blur-xl outline-none transition focus:border-sage-300 focus:ring-2 focus:ring-sage-200"
           />
         </div>
 
         <button
           onClick={onShowCommands}
-          className="pill-btn mx-auto mt-5 flex items-center gap-2 border border-sage-300/80 bg-sage-50/70 px-5 py-2.5 text-sm font-semibold text-sage-600 shadow-[0_10px_22px_-14px_rgba(120,105,85,0.45)] hover:bg-sage-100"
+          className="pill-btn mx-auto mt-5 flex items-center gap-2 border border-sage-300/80 bg-sage-50/70 px-5 py-2.5 text-sm font-semibold text-sage-600 shadow-[0_10px_22px_-14px_rgba(32,58,95,0.45)] hover:bg-sage-100"
         >
           <BookOpenText className="h-4 w-4" />
           Commandes utiles
@@ -83,7 +85,7 @@ export default function Home({ onSelect, onShowCommands, query, onQueryChange }:
                     <button
                       key={flow.id}
                       onClick={() => onSelect(flow, cat)}
-                      className="glass pill-btn group flex items-center gap-3 rounded-3xl p-4 text-left hover:-translate-y-0.5 hover:bg-white/75 hover:shadow-[0_22px_45px_-18px_rgba(120,105,85,0.38)]"
+                      className="glass pill-btn group flex items-center gap-3 rounded-3xl p-4 text-left hover:-translate-y-0.5 hover:bg-white/75 hover:shadow-[0_22px_45px_-18px_rgba(32,58,95,0.38)]"
                     >
                       <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-sage-100/80 text-sage-600 transition-colors group-hover:bg-sage-400 group-hover:text-white">
                         <flow.icon className="h-5 w-5" strokeWidth={1.9} />
