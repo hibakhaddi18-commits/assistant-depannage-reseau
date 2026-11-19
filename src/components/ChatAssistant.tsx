@@ -2,6 +2,14 @@ import { useEffect, useRef, useState } from 'react';
 import { MessageCircle, X, Send, Loader2 } from 'lucide-react';
 import { sendChat, WELCOME, type ChatMessage } from '@/lib/chat';
 
+const QUICK_PROMPTS = [
+  'Pas d’Internet',
+  'Wi-Fi lent',
+  'Erreur DNS',
+  'Adresse 169.254',
+  'Imprimante introuvable',
+];
+
 export default function ChatAssistant() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([WELCOME]);
@@ -14,8 +22,8 @@ export default function ChatAssistant() {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
   }, [messages, loading, open]);
 
-  async function handleSend() {
-    const text = input.trim();
+  async function sendText(raw: string) {
+    const text = raw.trim();
     if (!text || loading) return;
 
     const next: ChatMessage[] = [...messages, { role: 'user', content: text }];
@@ -32,6 +40,10 @@ export default function ChatAssistant() {
       setError(result.error);
     }
     setLoading(false);
+  }
+
+  function handleSend() {
+    sendText(input);
   }
 
   return (
@@ -91,6 +103,21 @@ export default function ChatAssistant() {
           </div>
 
           <div className="border-t border-white/70 bg-white/50 p-3">
+            <p className="mb-2 px-1 text-[11px] font-semibold uppercase tracking-wide text-warmgray-400">
+              Problèmes fréquents
+            </p>
+            <div className="mb-2.5 flex flex-wrap gap-1.5">
+              {QUICK_PROMPTS.map((label) => (
+                <button
+                  key={label}
+                  onClick={() => sendText(label)}
+                  disabled={loading}
+                  className="pill-btn border border-sage-300/70 bg-sage-50/80 px-3 py-1.5 text-xs font-semibold text-sage-600 hover:bg-sage-100 disabled:opacity-40 disabled:hover:bg-sage-50/80"
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
             <div className="flex items-end gap-2">
               <textarea
                 value={input}

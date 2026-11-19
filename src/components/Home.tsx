@@ -1,15 +1,16 @@
-import { Network, Search } from 'lucide-react';
+import { BookOpenText, Network, Search } from 'lucide-react';
 import { categories } from '@/data/categories';
 import { countSteps } from '@/data/countSteps';
 import type { Category, Flow } from '@/data/types';
 
 type HomeProps = {
   onSelect: (flow: Flow, category: Category) => void;
+  onShowCommands: () => void;
   query: string;
   onQueryChange: (q: string) => void;
 };
 
-export default function Home({ onSelect, query, onQueryChange }: HomeProps) {
+export default function Home({ onSelect, onShowCommands, query, onQueryChange }: HomeProps) {
   const q = query.trim().toLowerCase();
   const filtered = categories.map((cat) => ({
     ...cat,
@@ -42,6 +43,15 @@ export default function Home({ onSelect, query, onQueryChange }: HomeProps) {
             className="w-full rounded-full border border-white/70 bg-white/60 py-3 pl-11 pr-4 text-sm text-cocoa-700 placeholder:text-warmgray-400 shadow-[0_10px_25px_-15px_rgba(120,105,85,0.4)] backdrop-blur-xl outline-none transition focus:border-sage-300 focus:ring-2 focus:ring-sage-200"
           />
         </div>
+
+        <button
+          onClick={onShowCommands}
+          className="pill-btn mx-auto mt-5 flex items-center gap-2 border border-sage-300/80 bg-sage-50/70 px-5 py-2.5 text-sm font-semibold text-sage-600 shadow-[0_10px_22px_-14px_rgba(120,105,85,0.45)] hover:bg-sage-100"
+        >
+          <BookOpenText className="h-4 w-4" />
+          Commandes utiles
+          <span className="font-medium text-warmgray-500">— l’aide-mémoire des commandes réseau</span>
+        </button>
       </header>
 
       {!hasResults && (
