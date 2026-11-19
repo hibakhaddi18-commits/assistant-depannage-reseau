@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { ArrowLeft, Terminal, CheckCircle2, RotateCcw, Stethoscope, Lightbulb } from 'lucide-react';
+import { ArrowLeft, Terminal, CheckCircle2, RotateCcw, Stethoscope, Lightbulb, Copy, Share2 } from 'lucide-react';
 import type { Category, Diagnosis, Flow, Step } from '@/data/types';
+import { countSteps } from '@/data/countSteps';
+import { useCopyFeedback } from '@/lib/useCopyFeedback';
 
 type DiagnosisFlowProps = {
   flow: Flow;
@@ -26,8 +28,7 @@ export default function DiagnosisFlow({ flow, category, onHome, onSwitchFlow }: 
   const isDiagnosis = currentId.startsWith('d:');
   const step = !isDiagnosis ? (current as Step | undefined) : undefined;
   const diagnosis = isDiagnosis ? (current as Diagnosis | undefined) : undefined;
-  const totalSteps = countSteps(flow);
-  const progress = isDiagnosis ? 100 : Math.min(95, Math.round((history.length / Math.max(totalSteps, 1)) * 100));
+  const progress = isDiagnosis ? 100 : Math.min(95, Math.round((history.length / Math.max(countSteps(flow), 1)) * 100));
 
   function choose(choiceIndex: number) {
     setHistory((h) => [...h, { stepId: currentId, choiceIndex }]);
@@ -86,17 +87,7 @@ export default function DiagnosisFlow({ flow, category, onHome, onSwitchFlow }: 
             <p className="mt-3 text-sm leading-relaxed text-warmgray-500">{step.note}</p>
           )}
 
-          {step.command && (
-            <div className="cmd-block mt-5 p-4">
-              <div className="mb-2 flex items-center gap-2 text-xs font-semibold text-warmgray-500">
-                <Terminal className="h-3.5 w-3.5" />
-                Commande à exécuter (CMD)
-              </div>
-              <code className="block break-all font-mono text-sm font-semibold text-cocoa-700">
-                {step.command}
-              </code>
-            </div>
-          )}
+          {step.command && <CommandBlock command={step.command} />}
 
           <div className="mt-6">
             <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-warmgray-400">
@@ -161,6 +152,8 @@ export default function DiagnosisFlow({ flow, category, onHome, onSwitchFlow }: 
               </p>
               <p className="text-sm leading-relaxed text-cocoa-700">{diagnosis.solution}</p>
             </div>
+
+            <ShareButton flowTitle={flow.title} cause={diagnosis.cause} solution={diagnosis.solution} />
           </div>
 
           <div className="flex flex-col gap-3 sm:flex-row">
@@ -204,22 +197,57 @@ function resolveNext(flow: Flow, entry: HistoryEntry): string {
   return step?.choices[entry.choiceIndex]?.next ?? '__introuvable__';
 }
 
-function countSteps(flow: Flow): number {
-  const seen = new Set<string>();
-  let queue = [flow.start];
-  let max = 0;
-  while (queue.length > 0) {
-    const id = queue.shift();
-    if (!id || !id || seen.has(id)) continue;
-    seen.add(id);
-    if (id.startsWith('d:')) {
-      max = Math.max(max, seen.size);
-      continue;
-    }
-    const step = flow.steps[id];
-    if (!step) continue;
-    max = Math.max(max, seen.size);
-    queue = queue.concat(step.choices.map((c) => c.next));
-  }
-  return max;
+function CommandBlock({ command }: { command: string }) {
+  const { copied, copy } = useCopyFeedback();
+
+  return (
+    <div className="cmd-block relative mt-5 p-4 pr-24">
+      <button
+        onClick={() => copy(command)}
+        aria-label="Copier la commande"
+        className={
+          copied
+            ? 'pill-btn absolute right-3 top-3 flex items-center gap-1.5 bg-sage-400 px-3 py-1.5 text-xs font-semibold text-white'
+            : 'pill-btn absolute right-3 top-3 flex items-center gap-1.5 border border-white/70 bg-white/60 px-3 py-1.5 text-xs font-semibold text-cocoa-700 hover:bg-white/90'
+        }
+      >
+        {copied ? (
+          <CheckCircle2 className="h-3.5 w-3.5" />
+        ) : (
+          <Copy className="h-3.5 w-3.5" />
+        )}
+        {copied ? 'Copié !' : 'Copier'}
+      </button>
+      <div className="mb-2 flex items-center gap-2 text-xs font-semibold text-warmgray-500">
+        <Terminal className="h-3.5 w-3.5" />
+        Commande à exécuter (CMD)
+      </div>
+      <code className="block break-all font-mono text-sm font-semibold text-cocoa-700">
+        {command}
+      </code>
+    </div>
+  );
+}
+
+function ShareButton({ flowTitle, cause, solution }: { flowTitle: string; cause: string; solution: string }) {
+  const { copied, copy } = useCopyFeedback();
+  const text = [
+    `Diagnostic réseau : ${flowTitle}`,
+    '',
+    `Cause probable : ${cause}`,
+    '',
+    `Solution : ${solution}`,
+    '',
+    '— Assistant Dépannage Réseau',
+  ].join('\n');
+
+  return (
+    <button
+      onClick={() => copy(text)}
+      className="pill-btn mt-5 flex w-full items-center justify-center gap-2 border border-sage-300/80 bg-sage-50/70 px-5 py-3 text-sm font-semibold text-sage-600 hover:bg-sage-100"
+    >
+      {copied ? <CheckCircle2 className="h-4 w-4" /> : <Share2 className="h-4 w-4" />}
+      {copied ? 'Copié !' : 'Partager le diagnostic'}
+    </button>
+  );
 }

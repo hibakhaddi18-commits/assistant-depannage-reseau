@@ -1,5 +1,6 @@
 import { Network, Search } from 'lucide-react';
 import { categories } from '@/data/categories';
+import { countSteps } from '@/data/countSteps';
 import type { Category, Flow } from '@/data/types';
 
 type HomeProps = {
@@ -76,6 +77,9 @@ export default function Home({ onSelect, query, onQueryChange }: HomeProps) {
                       </span>
                       <span className="text-sm font-semibold leading-snug text-cocoa-700">
                         {flow.title}
+                        <span className="mt-1 block text-xs font-medium text-warmgray-500">
+                          {countSteps(flow)} étapes
+                        </span>
                       </span>
                     </button>
                   ))}

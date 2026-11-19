@@ -188,7 +188,7 @@ export const dossierInaccessible: Flow = {
     'acces-chimique': {
       id: 'acces-chimique',
       title: 'Le chemin réseau saisi est-il correct ?',
-      note: 'Testez l’ouverture directe du partage avec la syntaxe \\SERVEUR\Dossier. Vous pouvez lister les partages disponibles avec la commande net view.',
+      note: 'Testez l’ouverture directe du partage avec la syntaxe \\\\SERVEUR\\Dossier. Vous pouvez lister les partages disponibles avec la commande net view.',
       command: 'net view \\\\SERVEUR',
       choices: [
         { label: 'Le dossier s’ouvre avec le bon chemin', next: 'd:chemin-incorrect' },
