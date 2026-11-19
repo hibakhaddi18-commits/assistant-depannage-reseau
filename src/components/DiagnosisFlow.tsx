@@ -238,7 +238,7 @@ function ShareButton({ flowTitle, cause, solution }: { flowTitle: string; cause:
     '',
     `Solution : ${solution}`,
     '',
-    '— Assistant Dépannage Réseau',
+    '— Assistant de Diagnostic Réseau',
   ].join('\n');
 
   return (

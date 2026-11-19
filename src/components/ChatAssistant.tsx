@@ -63,7 +63,7 @@ export default function ChatAssistant() {
               <MessageCircle className="h-4.5 w-4.5" strokeWidth={1.9} />
             </span>
             <div>
-              <p className="text-sm font-semibold text-cocoa-700">Assistant Dépannage</p>
+              <p className="text-sm font-semibold text-cocoa-700">Assistant de Diagnostic Réseau</p>
               <p className="text-xs text-warmgray-500">Diagnostic réseau par la conversation</p>
             </div>
           </div>

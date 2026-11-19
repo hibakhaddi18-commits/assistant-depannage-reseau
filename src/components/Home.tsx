@@ -25,8 +25,11 @@ export default function Home({ onSelect, onShowCommands, query, onQueryChange }:
           <Network className="h-8 w-8 text-sage-400" strokeWidth={1.8} />
         </div>
         <h1 className="text-3xl font-semibold tracking-tight text-cocoa-700 sm:text-4xl">
-          Assistant Dépannage Réseau
+          Assistant de Diagnostic Réseau
         </h1>
+        <p className="mt-2 text-sm font-semibold uppercase tracking-[0.2em] text-sage-400">
+          Guide interactif pour techniciens
+        </p>
         <p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-warmgray-500">
           Choisissez le symptôme que rencontre le poste : l’assistant vous guide
           étape par étape, avec les commandes exactes à exécuter, jusqu’au
